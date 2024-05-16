@@ -2,6 +2,6 @@
 
 @section('content')
 
-<h1>Nuova Pagina</h1>
+<h1>I miei Contatti</h1>
 
 @endsection
