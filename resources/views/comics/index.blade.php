@@ -21,9 +21,9 @@
             <td>{{ $comic->series }}</td>
             <td>{{ $comic->sale_date }}</td>
             <td>
-                <button class="btn btn-success " href=""><i class="fa-regular fa-eye"></i></button>
-                <button class="btn btn-warning " href=""><i class="fa-solid fa-pencil"></i></button>
-                <button class="btn btn-danger " href=""><i class="fa-solid fa-trash-can"></i></button>
+                <a class="btn btn-success" href="{{ route('comics.show', $comic->id) }}"><i class="fa-regular fa-eye"></i></a>
+                <button class="btn btn-warning" href=""><i class="fa-solid fa-pencil"></i></button>
+                <button class="btn btn-danger" href=""><i class="fa-solid fa-trash-can"></i></button>
             </td>
         </tr>
         @empty
