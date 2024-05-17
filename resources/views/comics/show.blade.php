@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="container">
-    <h1>{{ $comic->title }}</h1>
+    <h1>{{ $comic->title }} <a class="btn btn-warning" href="{{ route('comics.edit', $comic) }}"><i class="fa-solid fa-pencil"></i></a> </h1>
 
     <div class="my-5">
         <p>{{ $comic->description }}</p>

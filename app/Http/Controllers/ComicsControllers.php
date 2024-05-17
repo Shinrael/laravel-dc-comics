@@ -33,8 +33,10 @@ class ComicsControllers extends Controller
     {
         $form_data = $request->all();
 
+        // Trasformo le stringhe in array con explode
         $array_artists = explode(',', $form_data['artists']);
         $array_writers = explode(',', $form_data['writers']);
+        // A questo punto li converto in JSON
         $form_data['artists'] = json_encode($array_artists);
         $form_data['writers'] = json_encode($array_writers);
 
@@ -70,17 +72,34 @@ class ComicsControllers extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Comic $comic)
     {
-        //
+        return view('comics.edit', compact('comic'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Comic $comic )
     {
-        //
+        $form_data = $request->all();
+
+        // Trasformo le stringhe in array con explode
+        $array_artists = explode(',', $form_data['artists']);
+        $array_writers = explode(',', $form_data['writers']);
+        // A questo punto li converto in JSON
+        $form_data['artists'] = json_encode($array_artists);
+        $form_data['writers'] = json_encode($array_writers);
+
+        if ($form_data['title'] === $comic->title) {
+            $form_data['slug'] = $comic->slug;
+        } else {
+            $form_data['slug'] = Helper::generateSlug($form_data['title'], new Comic);
+        }
+
+        $comic->update($form_data);
+
+        return redirect()->route('comics.show', $comic);
     }
 
     /**
