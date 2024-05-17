@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('title', 150);
             $table->string('slug')->unique();
             $table->text('description')->nullable();
-            $table->decimal('price', 4, 2);
+            $table->string('price');
             $table->string('series');
             $table->date('sale_date');
             $table->string('type');

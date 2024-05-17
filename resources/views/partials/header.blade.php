@@ -10,6 +10,9 @@
                 <a class="nav-link active" aria-current="page" href="{{route('comics.index')}}">I miei Comics</a>
               </li>
               <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="{{route('comics.create')}}">Aggiungi un fumetto</a>
+              </li>
+              <li class="nav-item">
                 <a class="nav-link" href="{{route('contacts')}}">I miei Contatti</a>
               </li>
             </ul>
