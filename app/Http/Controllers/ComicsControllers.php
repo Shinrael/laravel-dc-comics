@@ -35,17 +35,25 @@ class ComicsControllers extends Controller
 
         $array_artists = explode(',', $form_data['artists']);
         $array_writers = explode(',', $form_data['writers']);
+        $form_data['artists'] = json_encode($array_artists);
+        $form_data['writers'] = json_encode($array_writers);
+
+        $form_data['slug'] = Helper::generateSlug($form_data['title'], new Comic());
 
         $new_comic = new Comic();
-        $new_comic->title = $form_data['title'];
-        $new_comic->slug = Helper::generateSlug($new_comic->title, new Comic());
-        $new_comic->description = $form_data['description'];
-        $new_comic->price = $form_data['price'];
-        $new_comic->series = $form_data['series'];
-        $new_comic->sale_date = $form_data['sale_date'];
-        $new_comic->type = $form_data['type'];
-        $new_comic->artists = json_encode($array_artists);
-        $new_comic->writers = json_encode($array_writers);
+        // $new_comic->title = $form_data['title'];
+        // $new_comic->slug = Helper::generateSlug($new_comic->title, new Comic());
+        // $new_comic->description = $form_data['description'];
+        // $new_comic->price = $form_data['price'];
+        // $new_comic->series = $form_data['series'];
+        // $new_comic->sale_date = $form_data['sale_date'];
+        // $new_comic->type = $form_data['type'];
+        // $new_comic->artists = json_encode($array_artists);
+        // $new_comic->writers = json_encode($array_writers);
+        // $new_comic->save();
+
+
+        $new_comic->fill($form_data);
         $new_comic->save();
 
        return redirect()->route('comics.show', $new_comic);
