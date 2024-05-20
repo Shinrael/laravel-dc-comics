@@ -13,8 +13,10 @@ class ComicsControllers extends Controller
      */
     public function index()
     {
+        // Recupera tutti i fumetti dal database
         $comics = Comic::all();
 
+        // Ritorna la vista 'comics.index' con i dati dei fumetti
         return view('comics.index', compact('comics'));
     }
 
@@ -23,6 +25,7 @@ class ComicsControllers extends Controller
      */
     public function create()
     {
+        // Ritorna la vista per creare un nuovo fumetto
         return view('comics.create');
     }
 
@@ -31,34 +34,29 @@ class ComicsControllers extends Controller
      */
     public function store(Request $request)
     {
+        // Recupera tutti i dati dal form di richiesta
         $form_data = $request->all();
 
-        // Trasformo le stringhe in array con explode
+        // Trasforma le stringhe di artisti e scrittori in array
         $array_artists = explode(',', $form_data['artists']);
         $array_writers = explode(',', $form_data['writers']);
-        // A questo punto li converto in JSON
+
+        // Converte gli array in JSON
         $form_data['artists'] = json_encode($array_artists);
         $form_data['writers'] = json_encode($array_writers);
 
+        // Genera lo slug per il titolo del fumetto
         $form_data['slug'] = Helper::generateSlug($form_data['title'], new Comic());
 
+        // Crea una nuova istanza di Comic e riempie con i dati del form
         $new_comic = new Comic();
-        // $new_comic->title = $form_data['title'];
-        // $new_comic->slug = Helper::generateSlug($new_comic->title, new Comic());
-        // $new_comic->description = $form_data['description'];
-        // $new_comic->price = $form_data['price'];
-        // $new_comic->series = $form_data['series'];
-        // $new_comic->sale_date = $form_data['sale_date'];
-        // $new_comic->type = $form_data['type'];
-        // $new_comic->artists = json_encode($array_artists);
-        // $new_comic->writers = json_encode($array_writers);
-        // $new_comic->save();
-
-
         $new_comic->fill($form_data);
+
+        // Salva il nuovo fumetto nel database
         $new_comic->save();
 
-       return redirect()->route('comics.show', $new_comic);
+        // Reindirizza alla vista del fumetto appena creato
+        return redirect()->route('comics.show', $new_comic);
     }
 
     /**
@@ -66,7 +64,8 @@ class ComicsControllers extends Controller
      */
     public function show(Comic $comic)
     {
-       return view('comics.show', compact('comic'));
+        // Ritorna la vista del singolo fumetto con i dati specifici
+        return view('comics.show', compact('comic'));
     }
 
     /**
@@ -74,31 +73,37 @@ class ComicsControllers extends Controller
      */
     public function edit(Comic $comic)
     {
+        // Ritorna la vista per modificare il fumetto esistente
         return view('comics.edit', compact('comic'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Comic $comic )
+    public function update(Request $request, Comic $comic)
     {
+        // Recupera tutti i dati dal form di richiesta
         $form_data = $request->all();
 
-        // Trasformo le stringhe in array con explode
+        // Trasforma le stringhe di artisti e scrittori in array
         $array_artists = explode(',', $form_data['artists']);
         $array_writers = explode(',', $form_data['writers']);
-        // A questo punto li converto in JSON
+
+        // Converte gli array in JSON
         $form_data['artists'] = json_encode($array_artists);
         $form_data['writers'] = json_encode($array_writers);
 
+        // Verifica se il titolo è cambiato e genera un nuovo slug se necessario
         if ($form_data['title'] === $comic->title) {
             $form_data['slug'] = $comic->slug;
         } else {
             $form_data['slug'] = Helper::generateSlug($form_data['title'], new Comic);
         }
 
+        // Aggiorna i dati del fumetto esistente nel database
         $comic->update($form_data);
 
+        // Reindirizza alla vista del fumetto aggiornato
         return redirect()->route('comics.show', $comic);
     }
 
@@ -107,8 +112,10 @@ class ComicsControllers extends Controller
      */
     public function destroy(Comic $comic)
     {
+        // Elimina il fumetto dal database
         $comic->delete();
 
+        // Reindirizza alla lista dei fumetti con un messaggio di successo
         return redirect()->route('comics.index')->with('deleted', 'Il fumetto ' .$comic->title . ' è stato eliminato correttamente.');
     }
 }
