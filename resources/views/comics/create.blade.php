@@ -2,43 +2,145 @@
 
 @section('content')
 
+
 <div class="container my-5">
+
+    @if ($errors->any())
+        <div class="alert alert-danger" role="alert">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li> {{ $error }} </li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
     <h1>Aggiungi un Fumetto al Database!</h1>
     <div class="row">
         <div class="col-10">
             <form action="{{ route('comics.store') }}" method="POST">
                 @csrf
+
                 <div class="mb-3">
-                  <label for="title" class="form-label">Titolo</label>
-                  <input name="title" type="text" class="form-control" id="title">
+                  <label for="title" class="form-label">Titolo (*)</label>
+                  <input
+                    name="title"
+                    type="text"
+                    class="form-control @error('title') is-invalid @enderror"
+                    id="title"
+                    value="{{ old('title') }}">
+                    @error('title')
+                        <small class="text-danger">
+                            {{ $message }}
+                        </small>
+                    @enderror
                 </div>
+
                 <div class="mb-3">
                   <label for="description" class="form-label">Descrizione</label>
-                  <textarea name="description" type="text" class="form-control" id="description"></textarea>
+                    <textarea
+                        name="description"
+                        type="text"
+                        class="form-control @error('description') is-invalid @enderror"
+                        id="description"
+                        value="{{ old('description') }}">
+                    </textarea>
+                  @error('description')
+                        <small class="text-danger">
+                            {{ $message }}
+                        </small>
+                    @enderror
                 </div>
+
                 <div class="mb-3">
                   <label for="price" class="form-label">Prezzo</label>
-                  <input name="price" type="text" class="form-control" id="price">
+                  <input
+                    name="price"
+                    type="text"
+                    class="form-control @error('price') is-invalid @enderror"
+                    id="price"
+                    value="{{ old('price') }}">
+                    @error('price')
+                        <small class="text-danger">
+                            {{ $message }}
+                        </small>
+                    @enderror
                 </div>
+
                 <div class="mb-3">
                   <label for="series" class="form-label">Serie</label>
-                  <input name="series" type="text" class="form-control" id="series">
+                  <input
+                    name="series"
+                    type="text"
+                    class="form-control @error('series') is-invalid @enderror"
+                    id="series"
+                    value="{{ old('series') }}">
+                    @error('series')
+                        <small class="text-danger">
+                            {{ $message }}
+                        </small>
+                    @enderror
                 </div>
+
                 <div class="mb-3">
                   <label for="sale_date" class="form-label">Data Di Uscita</label>
-                  <input name="sale_date" type="date" class="form-control" id="sale_date">
+                  <input
+                    name="sale_date"
+                    type="date"
+                    class="form-control @error('sale_date') is-invalid @enderror"
+                    id="sale_date"
+                    value="{{ old('sale_date') }}"
+                    >
+                    @error('sale_date')
+                        <small class="text-danger">
+                            {{ $message }}
+                        </small>
+                    @enderror
                 </div>
+
                 <div class="mb-3">
                   <label for="type" class="form-label">Tipo</label>
-                  <input name="type" type="text" class="form-control" id="type">
+                  <input
+                    name="type"
+                    type="text"
+                    class="form-control @error('sale_date') is-invalid @enderror"
+                    id="type"
+                    value="{{ old('type') }}">
+                    @error('type')
+                        <small class="text-danger">
+                            {{ $message }}
+                        </small>
+                    @enderror
                 </div>
+
                 <div class="mb-3">
                   <label for="artists" class="form-label">Disegnatore/i</label>
-                  <input name="artists" type="text" class="form-control" id="artists">
+                  <input
+                    name="artists"
+                    type="text"
+                    class="form-control @error('artists') is-invalid @enderror"
+                    id="artists"
+                    value="{{ old('artists') }}">
+                    @error('artists')
+                        <small class="text-danger">
+                            {{ $message }}
+                        </small>
+                    @enderror
                 </div>
+
                 <div class="mb-3">
                   <label for="writers" class="form-label">Scrittore/i</label>
-                  <input name="writers" type="text" class="form-control" id="writers">
+                  <input
+                    name="writers"
+                    type="text"
+                    class="form-control @error('writers') is-invalid @enderror"
+                    id="writers"
+                    value="{{ old('writers') }}">
+                    @error('writers')
+                        <small class="text-danger">
+                            {{ $message }}
+                        </small>
+                    @enderror
                 </div>
 
                 <button type="submit" class="btn btn-success">Aggiungi il nuovo Fumetto</button>

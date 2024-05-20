@@ -3,6 +3,19 @@
 @section('content')
 
 <div class="container my-5">
+
+    {{-- Controllo degli errori --}}
+
+    @if ($errors->any())
+        <div class="alert alert-danger" role="alert">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li> {{ $error }} </li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
     <!-- Titolo della pagina di modifica -->
     <h1>Modifica il tuo fumetto</h1>
     <div class="row">
@@ -15,7 +28,7 @@
 
                 <!-- Campo per il titolo del fumetto -->
                 <div class="mb-3">
-                  <label for="title" class="form-label">Titolo</label>
+                  <label for="title" class="form-label">Titolo (*)</label>
                   <input name="title" type="text" class="form-control" id="title" value="{{ $comic->title }}" >
                 </div>
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Comic;
 use App\Functions\Helper;
+use App\Http\Requests\ComicRequest;
 
 class ComicsControllers extends Controller
 {
@@ -32,7 +33,7 @@ class ComicsControllers extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(ComicRequest $request)
     {
         // Recupera tutti i dati dal form di richiesta
         $form_data = $request->all();
@@ -80,7 +81,7 @@ class ComicsControllers extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Comic $comic)
+    public function update(ComicRequest $request, Comic $comic)
     {
         // Recupera tutti i dati dal form di richiesta
         $form_data = $request->all();
