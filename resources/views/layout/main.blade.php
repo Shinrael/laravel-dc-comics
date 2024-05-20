@@ -8,6 +8,24 @@
 
     <!-- Styles -->
     @vite('resources/js/app.js')
+    <link rel="stylesheet" href="{{ mix('css/app.css') }}">
+    @yield('styles')
+
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        main {
+            flex: 1;
+        }
+
+        footer {
+            flex-shrink: 0;
+        }
+    </style>
 
     <title>Comics-CRUD</title>
 </head>
@@ -15,7 +33,7 @@
     @include('partials.header')
 
     <main>
-        @yield('content')
+            @yield('content')
     </main>
 
     @include('partials.footer')

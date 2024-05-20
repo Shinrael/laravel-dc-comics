@@ -2,7 +2,7 @@
 
 @section('content')
 
-<div class="container my-5">
+<div class="container my-5 bg-white py-3">
 
     <!-- Se ci sono errori di validazione, mostra un'alert con la lista degli errori -->
     @if ($errors->any())

@@ -3,7 +3,7 @@
 @section('content')
 
 <!-- Titolo della pagina -->
-<h1>Elenco Fumetti</h1>
+<h1 class="text-white">Elenco Fumetti</h1>
 
 <!-- Messaggio di successo dopo la cancellazione di un fumetto -->
 @if (session('deleted'))
@@ -13,7 +13,7 @@
 @endif
 
 <!-- Tabella per visualizzare l'elenco dei fumetti -->
-<table class="table">
+<table class="table table-hover">
     <thead>
       <tr>
         <th scope="col">ID</th>
@@ -58,3 +58,5 @@
 </table>
 
 @endsection
+
+

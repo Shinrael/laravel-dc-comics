@@ -2,7 +2,7 @@
 
 @section('content')
 
-<div class="container">
+<div class="container bg-white py-3 my-2">
     <!-- Titolo del fumetto e pulsante per modificare -->
     <h1>{{ $comic->title }} <a class="btn btn-warning" href="{{ route('comics.edit', $comic) }}"><i class="fa-solid fa-pencil"></i></a> </h1>
 
