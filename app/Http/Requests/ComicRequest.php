@@ -23,7 +23,7 @@ class ComicRequest extends FormRequest
     {
         return [
             'title' => 'required|min:3|max:150',
-            'description' => 'max:255',
+            'description' => 'min:3',
             'price' => 'required',
             'series' => 'required',
             'sale_date' => 'max:255',
@@ -38,7 +38,7 @@ class ComicRequest extends FormRequest
             'title.required' => 'Il titolo è un campo obbligatorio!',
             'title.min' => 'Il titolo deve contenere almeno:min caratteri',
             'title.max' => 'Il titolo può avere un massimo di :max caratteri!',
-            'description.max' => 'Il titolo può avere un massimo di :max caratteri!',
+            'description.min' => 'La descrizione deve avere almeno :min caratteri!',
             'price.required' => 'Il prezzo è un campo obbligatorio!',
             'series.required' => 'La serie è un campo obbligatorio!',
             'sale_date.max' => 'La data di uscita può avere un massimo di :max caratteri!',

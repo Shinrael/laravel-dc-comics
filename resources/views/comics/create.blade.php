@@ -2,25 +2,28 @@
 
 @section('content')
 
-
 <div class="container my-5">
 
+    <!-- Se ci sono errori di validazione, mostra un'alert con la lista degli errori -->
     @if ($errors->any())
         <div class="alert alert-danger" role="alert">
             <ul>
                 @foreach ($errors->all() as $error)
-                    <li> {{ $error }} </li>
+                    <li>{{ $error }}</li>
                 @endforeach
             </ul>
         </div>
     @endif
 
+    <!-- Titolo della pagina -->
     <h1>Aggiungi un Fumetto al Database!</h1>
     <div class="row">
         <div class="col-10">
+            <!-- Form per aggiungere un nuovo fumetto -->
             <form action="{{ route('comics.store') }}" method="POST">
                 @csrf
 
+                <!-- Campo per il titolo del fumetto -->
                 <div class="mb-3">
                   <label for="title" class="form-label">Titolo (*)</label>
                   <input
@@ -36,6 +39,7 @@
                     @enderror
                 </div>
 
+                <!-- Campo per la descrizione del fumetto -->
                 <div class="mb-3">
                   <label for="description" class="form-label">Descrizione</label>
                     <textarea
@@ -52,8 +56,9 @@
                     @enderror
                 </div>
 
+                <!-- Campo per il prezzo del fumetto -->
                 <div class="mb-3">
-                  <label for="price" class="form-label">Prezzo</label>
+                  <label for="price" class="form-label">Prezzo (*)</label>
                   <input
                     name="price"
                     type="text"
@@ -67,8 +72,9 @@
                     @enderror
                 </div>
 
+                <!-- Campo per la serie del fumetto -->
                 <div class="mb-3">
-                  <label for="series" class="form-label">Serie</label>
+                  <label for="series" class="form-label">Serie (*)</label>
                   <input
                     name="series"
                     type="text"
@@ -82,6 +88,7 @@
                     @enderror
                 </div>
 
+                <!-- Campo per la data di uscita del fumetto -->
                 <div class="mb-3">
                   <label for="sale_date" class="form-label">Data Di Uscita</label>
                   <input
@@ -89,8 +96,7 @@
                     type="date"
                     class="form-control @error('sale_date') is-invalid @enderror"
                     id="sale_date"
-                    value="{{ old('sale_date') }}"
-                    >
+                    value="{{ old('sale_date') }}">
                     @error('sale_date')
                         <small class="text-danger">
                             {{ $message }}
@@ -98,12 +104,13 @@
                     @enderror
                 </div>
 
+                <!-- Campo per il tipo di fumetto -->
                 <div class="mb-3">
                   <label for="type" class="form-label">Tipo</label>
                   <input
                     name="type"
                     type="text"
-                    class="form-control @error('sale_date') is-invalid @enderror"
+                    class="form-control @error('type') is-invalid @enderror"
                     id="type"
                     value="{{ old('type') }}">
                     @error('type')
@@ -113,8 +120,9 @@
                     @enderror
                 </div>
 
+                <!-- Campo per i disegnatori del fumetto -->
                 <div class="mb-3">
-                  <label for="artists" class="form-label">Disegnatore/i</label>
+                  <label for="artists" class="form-label">Disegnatore/i (*)</label>
                   <input
                     name="artists"
                     type="text"
@@ -128,8 +136,9 @@
                     @enderror
                 </div>
 
+                <!-- Campo per gli scrittori del fumetto -->
                 <div class="mb-3">
-                  <label for="writers" class="form-label">Scrittore/i</label>
+                  <label for="writers" class="form-label">Scrittore/i (*)</label>
                   <input
                     name="writers"
                     type="text"
@@ -143,7 +152,9 @@
                     @enderror
                 </div>
 
+                <!-- Pulsante per inviare il form e aggiungere il fumetto -->
                 <button type="submit" class="btn btn-success">Aggiungi il nuovo Fumetto</button>
+                <!-- Pulsante per resettare il form -->
                 <button type="reset" class="btn btn-warning">Reset</button>
               </form>
         </div>
